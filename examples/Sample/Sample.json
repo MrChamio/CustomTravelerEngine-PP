@@ -1,0 +1,21 @@
+{
+  "acceptedIDs": ["GENERIC"],
+  "acceptedNations": ["Arstotzka"],
+  "requiredGender": "M",
+  "blacklistedKeywords": ["criminal", "Gender"],
+
+  "name": "Name-Lastname",
+  "gender": "",
+  "genderForced": "",
+  "face": "M-0-0-0-0-0",
+  "idNumber": "1234-ABCD",
+
+  "customVoiceClip": "Voice.wav",
+  "texTraveler": "SampleFace.png",
+  "texPassport": "SamplePassport.png",
+  "texDni": "SampleDni.png",
+  "texAsylum": "SampleAsy.png",
+  "texFallback": "",
+  "texScannerFront": "SampleFrontXray.png",
+  "texScannerBack": "SampleBackXray.png"
+}

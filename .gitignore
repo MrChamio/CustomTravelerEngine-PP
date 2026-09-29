@@ -1,0 +1,47 @@
+# =============================================================================
+# .gitignore - Custom Traveler Engine
+# =============================================================================
+# The project lives INSIDE the game folder, so this file works as a WHITELIST:
+# everything in the root is ignored (game files, MelonLoader, Unity data, logs,
+# Mods/ output, tree.txt...) and only what is listed in section 2 is tracked.
+#
+# NEVER commit game files or anything under MelonLoader/ (it contains the
+# game's decompiled code).
+# =============================================================================
+
+# 1) Ignore everything in the repo root
+/*
+
+# 2) ...except the project itself
+!/.gitignore
+!/README.md
+!/LICENSE
+!/build.bat
+!/buildScrap.bat
+!/CustomTravelerEngine/
+!/TravelerScraper/
+!/examples/
+
+# 3) Inside the tracked folders: build output and IDE files
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.pdb
+*.cache
+
+# 4) Safety net: binaries and generated files never go in the repo
+#    (upload the compiled DLLs as GitHub Release assets instead)
+*.dll
+*.exe
+*.zip
+*.log
+ct.conf
+
+# 5) OS junk
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,128 @@
+// ============================================================================
+// CUSTOM TRAVELER - ANNOTATED REFERENCE
+// ============================================================================
+// This is the same character as Sample.json, with every field explained.
+//
+// The engine reads character files leniently: // and /* */ comments and
+// trailing commas are allowed, so this file would load fine too. I still keep
+// Sample.json as the clean starting point and this one as the reference.
+//
+// How it works:
+//   1. The game generates a vanilla Traveler.
+//   2. The FILTERS below decide whether this character may replace it.
+//   3. If several characters pass, the engine rolls the global spawnProbability
+//      (ct.conf) and then picks ONE candidate at random.
+//   4. The CUSTOM DATA / ASSETS below overwrite the vanilla traveler.
+//      Anything left as "" (or a missing file) keeps the vanilla value.
+//
+// Folder rule: Mods/CustomTravelers/<Name>/<Name>.json (names must match).
+// Property names are CASE-SENSITIVE, and a misspelled property is silently
+// ignored. Invalid JSON (missing quote/comma/bracket) makes the character fail
+// with "Error parsing <Name>.json" in the console.
+// Everything is loaded when the game starts: restart the game after editing.
+// ============================================================================
+{
+  // ==========================================================================
+  // FILTERS - never modify the traveler, only decide if it is a valid base
+  // ==========================================================================
+
+  // Vanilla traveler's internal ID must START WITH one of these (case-insensitive).
+  //   "GENERIC" -> GENERIC_01, GENERIC_02...  (normal travelers; keeps you away
+  //                from story NPCs)
+  //   "ANY"     -> ignore the ID (debug / deliberate). One "ANY" overrides the
+  //                rest, so don't mix it with other values. Avoid it unless you
+  //                know what you're doing: story NPCs are no longer filtered out.
+  // Find IDs with the Scraper ([INTERNAL ID]) or the engine's own
+  // "[X-RAY] Traveler ID" line. Default if omitted: ["GENERIC"].
+  "acceptedIDs": ["GENERIC"],
+
+  // Vanilla traveler's nation must EQUAL one of these (case-insensitive).
+  //   "ALL" -> ignore nationality (don't mix it with other values).
+  // Names: Arstotzka, Obristan, Impor, UnitedFed, Antegria, Republia, Kolechia
+  // Scraper: [nation]. Engine: "[X-RAY] Original Nation". Default: ["ALL"].
+  "acceptedNations": ["Arstotzka"],
+
+  // ORIGINAL gender of the vanilla traveler (FILTER, not an override).
+  //   "M" | "F" | "X" (ignore; "ALL" and "" also ignore it).
+  // Scraper: [gender]. Engine: "[X-RAY] Original Gender". Default: "X".
+  // Use it so a forced gender can't hide a vanilla gender error:
+  //   only males, no forcing ->  requiredGender "M", gender "", genderForced ""
+  //   anyone, forcing gender ->  requiredGender "X", gender "M", genderForced "YES"
+  //                              + "Gender" in blacklistedKeywords
+  "requiredGender": "M",
+
+  // Skip the vanilla traveler if any keyword is contained (case-insensitive
+  // substring) in its error ID, error group ID or internal spec error.
+  // Scraper: [SPEC ERROR], [ERROR ID], [ERROR GROUP]. Engine: the "[X-RAY]
+  // Internal Spec Error / Error ID / Error Group ID" lines.
+  //
+  // There is NO built-in list: if you omit this field, nothing is blacklisted.
+  // I strongly recommend always keeping "criminal": otherwise the "criminal of
+  // the day" could get your face and become undetectable outside Inspection Mode.
+  // "Gender" also matches WrongGender / ConfusingGender.
+  "blacklistedKeywords": ["criminal", "Gender"],
+
+  // ==========================================================================
+  // CUSTOM DATA - applied after this character has been selected
+  // ==========================================================================
+
+  // "First-Last", separated by "-".
+  "name": "Name-Lastname",
+
+  // "M" or "F". Only takes effect together with genderForced.
+  // Leave "" to keep the vanilla gender.
+  "gender": "",
+
+  // "YES" forces "gender" onto the traveler. "" = do not force.
+  // If used, add "Gender" to blacklistedKeywords.
+  "genderForced": "",
+
+  // Game face DNA: Gender-Shoulders-Head-Eyes-NoseMouth-Palette
+  //   Shoulders: clothing and body shape (3 body types)
+  //   Head:      head shape, hair, hats
+  //   Eyes:      eyes, eyebrows, glasses
+  //   NoseMouth: nose, mouth, and (males) beard/moustache
+  //   Palette:   skin and hair colour
+  // It is separate from texTraveler, but the game logic still reads it: make it
+  // match your sprite (beard, glasses, baldness...) or documents may contradict
+  // the picture. Get codes from the Scraper (Phase 3: JSON FACE STRING).
+  "face": "M-0-0-0-0-0",
+
+  // ID number written on the traveler's documents.
+  "idNumber": "1234-ABCD",
+
+  // ==========================================================================
+  // CUSTOM ASSETS - paths relative to this character's folder
+  // ==========================================================================
+  // "" or a missing file -> the vanilla asset is kept (silently).
+  // PNGs are stretched to the size the game requests (nearest-neighbour, aspect
+  // ratio NOT preserved), so provide the exact resolution.
+
+  // WAV, uncompressed PCM 8 or 16-bit. Replaces "speech-entrant" while this
+  // character is at the booth.
+  "customVoiceClip": "Voice.wav",
+
+  // Booth portrait. 150x120.
+  // If empty, the procedural face built from "face" is shown instead.
+  "texTraveler": "SampleFace.png",
+
+  // Passport photo. 40x48.
+  "texPassport": "SamplePassport.png",
+
+  // Arstotzkan ID card photo. 32x38.
+  "texDni": "SampleDni.png",
+
+  // Asylum / diplomatic document photo. 60x72.
+  "texAsylum": "SampleAsy.png",
+
+  // Used for any document photo without its own texture (other sizes, or the
+  // specific texture missing). Prefer individual sprites over this.
+  "texFallback": "",
+
+  // X-ray scanner: replaces ONLY the head (front / back); the game still draws
+  // the body. Turn on verboseDebug and look for the line
+  // "[SCANNER] Game requested HeadFront. Original resolution: WxH" to learn the
+  // exact size.
+  "texScannerFront": "SampleFrontXray.png",
+  "texScannerBack": "SampleBackXray.png"
+}

@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MelonLoader">
+      <HintPath>..\MelonLoader\net6\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\MelonLoader\net6\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Common">
+      <HintPath>..\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\MelonLoader\Il2CppAssemblies\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
